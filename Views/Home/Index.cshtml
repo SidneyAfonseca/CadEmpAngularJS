@@ -1,0 +1,160 @@
+﻿<div class="container" ng-controller="empresaCtrl">
+    @* INÍCIO DIV - panel panel-info *@
+    <div class="panel panel-info">
+        <div class="panel-heading">Listar Empresas</div>
+
+        <div class="panel-body">
+            <button type="button" class="btn btn-info" data-target="#AdicionarEmpresa" data-toggle="modal">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+
+        <table class="table table-bordered">
+            <thead style="background-color: grey;">
+                <tr>
+                    <th class="text-center">Id Empresa</th>
+                    <th class="text-center">Nome</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">CNPJ</th>
+                    <th class="text-center">Endereço</th>
+                    <th class="text-center">Ação</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="func in Empresas">
+                    <td class="text-center">{{func.EmpresaId}}</td>
+                    <td class="text-center">{{func.Nome}}</td>
+                    <td class="text-center">{{func.Email}}</td>
+                    <td class="text-center">{{func.CNPJ}}</td>
+                    <td class="text-center">{{func.Endereco}}</td>
+                    <td class="text-center" style="width: 200px;">
+                        <a href="#"
+                           data-target="#AtualizarEmpresa"
+                           data-toggle="modal" class="btn btn-success"
+                           ng-click="atualizarEmpresaPorId(func)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a href="#"
+                           data-target="#ExcluirEmpresa"
+                           id="btnExcluir"
+                           data-toggle="modal" class="btn btn-danger"
+                           ng-click="excluirEmpresaPorId(func)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        @* INÍCIO MODAL - ADICIONAR FUNCIONÁRIO *@
+        <div class="modal" id="AdicionarEmpresa" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-info">Adicionar Empresa</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" name="AdicionarNovaEmpresaForm">
+                            <div class="form-group">
+                                <input class="form-control" readonly="readonly" name="empresaId" type="hidden" placeholder="Id Empresa" />
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="nome" ng-model="nome" placeholder="Nome Empresa" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="nome" ng-model="email" placeholder="E-mail" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="nome" ng-model="CNPJ" placeholder="CNPJ" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="nome" ng-model="endereco" placeholder="Endereco" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal" ng-click="adicionarEmpresa()">Adicionar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="limparDados()">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* FIM MODAL - ADICIONAR FUNCIONÁRIO *@
+
+        @* INÍCIO MODAL - ATUALIZAR FUNCIONÁRIO *@
+        <div class="modal" id="AtualizarEmpresa" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-info">Atualizar Empresa</h3>
+                    </div>
+                    <div class="modal-body" style="margin-left: 20px">
+                        <form class="form-horizontal" name="AtualizarForm">
+                            <div class="form-group">
+                                <input class="form-control" readonly="readonly" name="EmpresaId" ng-model="AtualizadoEmpresaId" type="hidden" placeholder="Empresa Id" />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info"> Nome</label>
+                                <input class="form-control" name="Nome" ng-model="AtualizadoNome" type="text" placeholder="Nome" />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info"> Email</label>
+                                <input class="form-control" name="Email" ng-model="AtualizadoEmail" type="email" placeholder="Email" />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info"> CNPJ</label>
+                                <input class="form-control" name="CNPJ" ng-model="AtualizadoCnpj" type="text" placeholder="CNPJ" />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info"> Endereço</label>
+                                <input class="form-control" name="Endereco" ng-model="AtualizadoEndereco" type="text" placeholder="Endereço" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnUpdate" data-dismiss="modal" ng-click="atualizarEmpresa()">
+                            Atualizar
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* FIM MODAL - ATUALIZAR FUNCIONÁRIO *@
+
+        @* INÍCIO MODAL - EXCLUIR FUNCIONÁRIO *@
+
+        <div class="modal" role="dialog" id="ExcluirEmpresa">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-info">Você tem certeza que deseja excluir a Empresa?</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <p>Id da Empresa : {{AtualizadoEmpresaId}}</p>
+                            <p>Nome da Empresa : {{AtualizadoNome}}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="excluirEmpresa(AtualizadoEmpresaId)">Excluir</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* FIM MODAL - EXCLUIR FUNCIONÁRIO *@
+
+    </div>
+    @* FIM DIV - panel panel-info *@
+
+</div>
+
+@section scripts {
+    <script src="~/AngularJsApp/Empresa/Module.js"></script>
+    <script src="~/AngularJsApp/Empresa/Service.js"></script>
+    <script src="~/AngularJsApp/Empresa/Controller.js"></script>
+}
