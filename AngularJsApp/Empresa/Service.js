@@ -8,6 +8,11 @@ empresaApp.service('empresaService', function ($http)
         return $http.get("/Empresa/GetEmpresa");
     }
 
+    this.getEmpresaNome = function (pesquisa)
+    {
+        return $http.get("/Empresa/GetEmpresaNome");
+    }
+
     ////Método responsável por Adicionar Empresas: CREATE
     this.adicionarEmpresa = function (empresa) {
 

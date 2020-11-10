@@ -5,7 +5,7 @@ empresaApp.controller('empresaCtrl', function ($scope, empresaService) {
     //Aqui estamos carregando todos os dados gravados da empresa quando a página for recarregada:
     carregarEmpresas();
 
-    //Método responsável por carregar todas as propriedades do Empresa:
+    //Método responsável por carregar todas as propriedades da Empresa:
     function carregarEmpresas() {
         var listarEmpresas = empresaService.getTodasEmpresas();
 
@@ -17,6 +17,21 @@ empresaApp.controller('empresaCtrl', function ($scope, empresaService) {
                 alert("Ocorreu um erro ao tentar listar todas as Empresas!");
             });
     }
+
+    //TODO
+    //Método responsável por carregar todas as propriedades da Empresa por nome:
+    function carregarEmpresaNome(pesquisa) {
+        var listarEmpresas = empresaService.get(pesquisa);
+
+        listarEmpresas.then(function (d) {
+            //se tudo der certo:
+            $scope.Empresas = d.data;
+        },
+            function () {
+                alert("Ocorreu um erro ao tentar listar Empresas por nome!");
+            });
+    }
+
 
     ////Método responsável por adicionar cada propriedade de um Nova Empresa:
     $scope.adicionarEmpresa = function () {
@@ -57,10 +72,10 @@ empresaApp.controller('empresaCtrl', function ($scope, empresaService) {
     $scope.atualizarEmpresaPorId = function (empresa) {
 
         $scope.AtualizadoEmpresaId = empresa.EmpresaId;
-        $scope.AtualizadoNome = empresa.Nome;
-        $scope.AtualizadoEmail = empresa.Email;
-        $scope.AtualizadoCnpj = empresa.CNPJ;
-        $scope.AtualizadoEndereco = empresa.Endereco;
+        $scope.AtualizadoNome      = empresa.Nome;
+        $scope.AtualizadoEmail     = empresa.Email;
+        $scope.AtualizadoCnpj      = empresa.CNPJ;
+        $scope.AtualizadoEndereco  = empresa.Endereco;
     }
 
     ////Método responsável por resgatar dados para a exclusão do Emprresa:

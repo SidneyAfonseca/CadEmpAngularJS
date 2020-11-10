@@ -22,6 +22,30 @@ namespace CadEmpAngularJS.Controllers
             }
         }
 
+
+        // GET: NomeEmpresa
+        public JsonResult GetEmpresaNome(string pesquisa)
+        {
+            using (var db = new EmpresasEntities())
+            {
+
+                List<Empresa> empresa = (List<Empresa>)(from s in db.Empresas
+                                              select s);
+
+                if (!String.IsNullOrEmpty(pesquisa))
+                {
+                    empresa = empresa.Where(s => s.Nome.Contains(pesquisa)).ToList();
+                }
+                else
+                {
+                    List<Empresa> listarEmpresa = db.Empresas.ToList();
+                }
+
+                return Json(empresa, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         #endregion
 
         #region Método para Adicionar Empresa - CREATE
@@ -61,10 +85,10 @@ namespace CadEmpAngularJS.Controllers
 
                 else
                 {
-                    empresaAtualizada.Nome     = empresa.Nome;
-                    empresaAtualizada.CNPJ     = empresa.CNPJ;
+                    empresaAtualizada.Nome = empresa.Nome;
+                    empresaAtualizada.CNPJ = empresa.CNPJ;
                     empresaAtualizada.Endereco = empresa.Endereco;
-                    empresaAtualizada.Email    = empresa.Email;
+                    empresaAtualizada.Email = empresa.Email;
 
                     db.SaveChanges();
                     return Json(new { success = true });

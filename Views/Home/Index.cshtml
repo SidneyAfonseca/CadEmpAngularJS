@@ -1,4 +1,5 @@
-﻿<div class="container" ng-controller="empresaCtrl">
+﻿
+<div class="container" ng-controller="empresaCtrl">
     @* INÍCIO DIV - panel panel-info *@
     <div class="panel panel-info">
         <div class="panel-heading">Listar Empresas</div>
@@ -7,7 +8,12 @@
             <button type="button" class="btn btn-info" data-target="#AdicionarEmpresa" data-toggle="modal">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
+            <label>Nome:</label>
+            <input type="text" class="input-control text" ng-model="nome">
+            <button ng-click="carregarEmpresaNome(func)">Consultar</button>
         </div>
+
+       
 
         <table class="table table-bordered">
             <thead style="background-color: grey;">
