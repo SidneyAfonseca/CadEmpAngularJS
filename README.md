@@ -1,4 +1,5 @@
 Das instruções para configuração e utilização da aplicação
+
 1 - Instalar o Microsoft Visual Studio Community.
 
 2 - Criar na raiz do disco local C a Pasta CadEmpAngularJS.
