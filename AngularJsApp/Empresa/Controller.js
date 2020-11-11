@@ -20,9 +20,9 @@ empresaApp.controller('empresaCtrl', function ($scope, empresaService) {
 
     //TODO
     //Método responsável por carregar todas as propriedades da Empresa por nome:
-    function carregarEmpresaNome(pesquisa) {
+    function carregarEmpresaNome() {
         var listarEmpresas = empresaService.get(pesquisa);
-
+        var empresa = {  nome: $scope.pesquisa}
         listarEmpresas.then(function (d) {
             //se tudo der certo:
             $scope.Empresas = d.data;
